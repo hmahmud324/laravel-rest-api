@@ -5,16 +5,19 @@ namespace App\Http\Controllers;
 use App\Models\Petition;
 use Illuminate\Http\Request;
 use App\Http\Resources\PetitionResource;
+use App\Http\Resources\PetitionCollection;
+
 
 
 class PetitionController extends Controller
 {
     /**
      * Display a listing of the resource.
+     * @return \Illuminate\Resources\Json\AnonymousResourceCollection
      */
     public function index()
     {
-        //
+        return new PetitionCollection(Petition::all());
     }
 
     /**
@@ -22,17 +25,18 @@ class PetitionController extends Controller
      */
     public function store(Request $request)
     {
-        $petition = Petition::create($request->all());
+        $petition = Petition::create($request->only(['title' ,'category','description','author','signees']));
 
         return new PetitionResource($petition);
     }
 
     /**
      * Display the specified resource.
+     * @return PetitionResource
      */
     public function show(Petition $petition)
     {
-        //
+        return new PetitionResource($petition);
     }
 
     /**
