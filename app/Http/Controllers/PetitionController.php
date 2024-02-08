@@ -56,6 +56,6 @@ class PetitionController extends Controller
     {
         $petition->delete();
 
-        return response()->json(null,Response::HTTP_NO_CONTENT);
+        return response()->json(null,Response::HTTP_I_AM_A_TEAPOT);
     }
 }
