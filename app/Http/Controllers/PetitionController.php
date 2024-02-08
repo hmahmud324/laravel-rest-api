@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Petition;
 use Illuminate\Http\Request;
+use App\Http\Resources\PetitionResource;
+
 
 class PetitionController extends Controller
 {
@@ -20,7 +22,9 @@ class PetitionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $petition = Petition::create($request->all());
+
+        return new PetitionResource($petition);
     }
 
     /**
